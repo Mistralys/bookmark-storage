@@ -1,2 +1,4 @@
-# bookmark-storage
-Web UI for storing bookmarks
+# Bookmark Storage
+
+Simple Web UI for storing bookmarks.
+
