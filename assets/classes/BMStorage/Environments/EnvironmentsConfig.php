@@ -32,7 +32,8 @@ use const BMStorage\Configuration\LOGGING_ENABLED;
  */
 class EnvironmentsConfig extends BaseEnvironmentsConfig
 {
-    const ENVIRONMENT_LOCAL = 'local';
+    public const ENVIRONMENT_LOCAL = 'local';
+    public const ENVIRONMENT_LIVE = 'live';
 
     protected function getClassName(): string
     {
@@ -83,6 +84,9 @@ class EnvironmentsConfig extends BaseEnvironmentsConfig
             ->setJavascriptMinified(JAVASCRIPT_MINIFIED)
             ->setShowQueries(SHOW_QUERIES)
             ->setTrackQueries(TRACK_QUERIES);
+
+        $environment
+            ->includeFile($this->configFolder.'/hosts.php');
     }
 
     protected function getRequiredSettingNames(): array
