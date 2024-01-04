@@ -7,3 +7,4 @@ composer.phar
 /version
 /tools
 /storage/logs
+config/hosts.php
