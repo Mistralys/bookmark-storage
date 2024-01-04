@@ -50,6 +50,7 @@ class LocalEnvironment extends BaseEnvironmentConfig
             ->setVendorURL(VENDOR_URL)
             ->setAuthSalt(AUTH_SALT)
             ->setRequestLogPassword(REQUEST_LOG_PASSWORD)
+            ->setSimulateSession(true)
 
             ->setDBHost(DB_HOST)
             ->setDBName(DB_NAME)
