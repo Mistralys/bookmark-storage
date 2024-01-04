@@ -6,3 +6,4 @@ composer.phar
 /themes/default/js/localization/translator.js
 /version
 /tools
+/storage/logs
