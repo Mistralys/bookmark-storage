@@ -19,22 +19,9 @@ declare(strict_types=1);
  * @author Sebastian Mordziol <s.mordziol@mistralys.eu>
  * @see Application_Session_Native
  */
-class BMStorage_Session extends Application_Session_Native
+class BMStorage_Session extends Application_Session_Native implements Application_Session_AuthTypes_NoneInterface
 {
-    protected function handleLogin() : ?Application_Users_User
-    {
-        return Application_Driver::createUsers()->getByID(Application::USER_ID_DUMMY);
-    }
-
-    public function fetchRights(Application_Users_User $user) : array
-    {
-        return array();
-    }
-
-    public function isRegistrationEnabled() : bool
-    {
-        return false;
-    }
+    use Application_Session_AuthTypes_None;
 
     public function getPrefix(): string
     {
