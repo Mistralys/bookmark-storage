@@ -8,9 +8,11 @@
 declare(strict_types=1);
 
 use AppUtils\FileHelper\FileInfo;
+use BMStorage\Area\BookmarksScreen;
 use BMStorage\Area\DevelScreen;
 use BMStorage\Area\TranslationScreen;
 use BMStorage\Area\SettingScreen;
+use BMStorage\CustomIcon;
 
 /**
  * Main driver class for the application.
@@ -51,6 +53,7 @@ class BMStorage extends Application_Driver
     public function getAdminAreas() : array
     {
         return array(
+            BookmarksScreen::URL_NAME => getClassTypeName(BookmarksScreen::class),
             Application_Admin_Area_Settings::URL_NAME => getClassTypeName(SettingScreen::class),
             Application_Admin_TranslationsArea::URL_NAME => getClassTypeName(TranslationScreen::class),
             Application_Admin_Area_Devel::URL_NAME => getClassTypeName(DevelScreen::class),
@@ -88,5 +91,10 @@ class BMStorage extends Application_Driver
         }
         
         return $this->extendedVersion;
+    }
+
+    public static function icon() : CustomIcon
+    {
+        return new CustomIcon();
     }
 }

@@ -1,0 +1,10 @@
+{
+    "bookmark": {
+        "icon": "bookmark",
+        "type": "fas"
+    },
+    "external-url": {
+        "icon": "external-link-alt",
+        "type": "fas"
+    }
+}
