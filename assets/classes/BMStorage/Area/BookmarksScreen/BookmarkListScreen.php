@@ -13,6 +13,7 @@ use BMStorage\Bookmarks\BookmarkRecord;
 use BMStorage\ClassFactory;
 use DBHelper_BaseFilterCriteria_Record;
 use DBHelper_BaseRecord;
+use UI_DataGrid_Action;
 
 class BookmarkListScreen extends Application_Admin_Area_Mode_CollectionList
 {
@@ -67,6 +68,30 @@ class BookmarkListScreen extends Application_Admin_Area_Mode_CollectionList
 
     protected function configureActions(): void
     {
+        $this->grid->addAction('delete-bookmarks', t('Delete...'))
+            ->makeDangerous()
+            ->setIcon(BMStorage::icon()->delete())
+            ->setCallback($this->multiDeleteBookmarks(...))
+            ->makeConfirm(sb()
+                ->para(sb()
+                    ->bold(t('This will delete the selected bookmarks.'))
+                )
+                ->para(sb()
+                    ->cannotBeUndone()
+                )
+            );
+    }
+
+    private function multiDeleteBookmarks(UI_DataGrid_Action $action) : void
+    {
+        $collection = $this->createCollection();
+
+        $action->createRedirectMessage($collection->getAdminListURL())
+            ->single(t('The bookmark %1$s has been deleted at %2$s.', '$label', '$time'))
+            ->none(t('No bookmarks selected that could be deleted.'))
+            ->multiple(t('%1$s bookmarks have been deleted at %2$s.', '$amount', '$time'))
+            ->processDeleteDBRecords($collection)
+            ->redirect();
     }
 
     public function getBackOrCancelURL(): string
