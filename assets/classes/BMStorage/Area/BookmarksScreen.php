@@ -41,6 +41,11 @@ class BookmarksScreen extends Application_Admin_Area
         return true;
     }
 
+    protected function _handleBreadcrumb(): void
+    {
+        $this->breadcrumb->appendArea($this);
+    }
+
     public function getNavigationTitle(): string
     {
         return t('Bookmarks');
