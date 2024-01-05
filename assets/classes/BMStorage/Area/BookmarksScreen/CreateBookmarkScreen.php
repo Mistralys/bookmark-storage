@@ -6,6 +6,7 @@ namespace BMStorage\Area\BookmarksScreen;
 
 use Application_Admin_Area_Mode_CollectionCreate;
 use Application_Formable_RecordSettings;
+use BMStorage;
 use BMStorage\Bookmarks\BookmarkCollection;
 use BMStorage\ClassFactory;
 use DBHelper_BaseRecord;
@@ -54,5 +55,17 @@ class CreateBookmarkScreen extends Application_Admin_Area_Mode_CollectionCreate
     public function getTitle(): string
     {
         return t('Create a bookmark');
+    }
+
+    public function getNavigationTitle(): string
+    {
+        return t('Create bookmark');
+    }
+
+    protected function _handleHelp(): void
+    {
+        $this->renderer
+            ->getTitle()
+            ->setIcon(BMStorage::icon()->bookmark());
     }
 }
