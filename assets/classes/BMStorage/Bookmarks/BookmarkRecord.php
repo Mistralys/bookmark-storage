@@ -4,10 +4,16 @@ declare(strict_types=1);
 
 namespace BMStorage\Bookmarks;
 
+use Application_Admin_ScreenInterface;
+use BMStorage\Area\BookmarksScreen\ViewBookmarkScreen;
+use BMStorage\Area\BookmarksScreen\ViewBookmarkScreen\BookmarkSettingsScreen;
 use BMStorage\Crypt;
 use DateTime;
 use DBHelper_BaseRecord;
 
+/**
+ * @property BookmarkCollection $collection
+ */
 class BookmarkRecord extends DBHelper_BaseRecord
 {
     public function getLabel(): string
@@ -17,7 +23,7 @@ class BookmarkRecord extends DBHelper_BaseRecord
 
     public function getLabelLinked() : string
     {
-        return $this->getLabel();
+        return (string)sb()->link($this->getLabel(), $this->getAdminURL());
     }
 
     public function getDomain(): string
@@ -42,5 +48,20 @@ class BookmarkRecord extends DBHelper_BaseRecord
 
     protected function recordRegisteredKeyModified($name, $label, $isStructural, $oldValue, $newValue)
     {
+    }
+
+    public function getAdminURL(array $params=array()) : string
+    {
+        $params[Application_Admin_ScreenInterface::REQUEST_PARAM_MODE] = ViewBookmarkScreen::URL_NAME;
+        $params[BookmarkCollection::PRIMARY_NAME] = $this->getID();
+
+        return $this->collection->getAdminURL($params);
+    }
+
+    public function getAdminSettingsURL(array $params=array()) : string
+    {
+        $params[Application_Admin_ScreenInterface::REQUEST_PARAM_SUBMODE] = BookmarkSettingsScreen::URL_NAME;
+
+        return $this->getAdminURL($params);
     }
 }
