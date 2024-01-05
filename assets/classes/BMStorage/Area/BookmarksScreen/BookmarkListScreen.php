@@ -114,6 +114,13 @@ class BookmarkListScreen extends Application_Admin_Area_Mode_CollectionList
         return t('Available bookmarks');
     }
 
+    protected function _handleHelp(): void
+    {
+        $this->renderer
+            ->getTitle()
+            ->setIcon(BMStorage::icon()->bookmark());
+    }
+
     protected function _handleSidebar(): void
     {
         $this->sidebar->addButton('create-bookmark', t('Create new...'))
