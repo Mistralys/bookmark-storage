@@ -40,8 +40,8 @@ class BookmarkSettingsManager extends \Application_Formable_RecordSettings_Exten
 
     protected function registerSettings(): void
     {
-        $group = $this->addGroup(t('General'))
-            ->setIcon(BMStorage::icon()->bookmark());
+        $group = $this->addGroup(t('Settings'))
+            ->setIcon(BMStorage::icon()->settings());
 
         $group->registerSetting(self::SETTING_LABEL)
             ->setStorageName(BookmarkCollection::COL_LABEL)
